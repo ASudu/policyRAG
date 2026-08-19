@@ -1,0 +1,30 @@
+[project]
+name = "policy-rag-governance"
+version = "0.1.0"
+description = "Local-first policy RAG governance evaluation framework"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "chromadb",
+    "deepeval",
+    "numpy",
+    "ollama",
+    "pandas",
+    "plotly",
+    "pydantic",
+    "pymupdf",
+    "scikit-learn",
+    "streamlit",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.uv]
+default-groups = ["dev"]
