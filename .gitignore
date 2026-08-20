@@ -8,3 +8,4 @@ __pycache__/
 chroma_db/
 *.pyc
 project.md
+project_steps_docs/
