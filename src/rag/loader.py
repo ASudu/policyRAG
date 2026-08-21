@@ -19,7 +19,6 @@ Document(
 ```
 """
 
-import os
 from pathlib import Path
 import re
 
@@ -33,74 +32,78 @@ class Document:
     def __repr__(self):
         return f"Document(metadata={self.metadata})"
 
-# Pattern to match policy rule sections
-RULE_PATTERN = re.compile(
-    r"^###\s+([A-Z]+-\d{3})\s+—\s+(.+?)\s*$",
-    re.MULTILINE,
-)
+class Loader:
+    """Loader for policy markdown files."""
 
-# ------------------------- HELPER FUNCTIONS -------------------------
-def extract_metadata(markdown: str) -> dict[str, str]:
-    """Extracts metadata from the markdown content."""
-    metadata = {}
-    in_metadata = False
+    RULE_PATTERN = re.compile(
+        r"^###\s+([A-Z]+-\d{3})\s+—\s+(.+?)\s*$",
+        re.MULTILINE,
+    )
 
-    for line in markdown.splitlines():
-        if line.strip() == "## Document Metadata":
-            in_metadata = True
-            continue
+    def extract_metadata(self, markdown: str) -> dict[str, str]:
+        """Extract metadata from the `## Document Metadata` section."""
+        metadata = {}
+        in_metadata = False
 
-        if in_metadata and line.startswith("## "):
-            break
+        for line in markdown.splitlines():
+            if line.strip() == "## Document Metadata":
+                in_metadata = True
+                continue
 
-        if in_metadata and line.startswith("- ") and ":" in line:
-            key, value = line[2:].split(":", 1)
-            metadata[key.strip().lower().replace(" ", "_")] = value.strip()
+            if in_metadata and line.startswith("## "):
+                break
 
-    return metadata
+            if in_metadata and line.startswith("- ") and ":" in line:
+                key, value = line[2:].split(":", 1)
+                metadata[key.strip().lower().replace(" ", "_")] = value.strip()
 
-def load_policy_sections(path: Path) -> list[Document]:
-    """Loads policy sections from a markdown file and returns a list of Document objects."""
-    markdown = path.read_text(encoding="utf-8")
-    metadata = extract_metadata(markdown)
+        return metadata
 
-    matches = list(RULE_PATTERN.finditer(markdown))
-    documents = []
+    def load_policy_sections(self, path: Path) -> list[Document]:
+        """Load rule sections from a single markdown policy file."""
+        markdown = path.read_text(encoding="utf-8")
+        metadata = self.extract_metadata(markdown)
 
-    for index, match in enumerate(matches):
-        start = match.end()
-        end = (
-            matches[index + 1].start()
-            if index + 1 < len(matches)
-            else markdown.find("\n## 5. Exceptions", start)
-        )
+        matches = list(self.RULE_PATTERN.finditer(markdown))
+        documents = []
 
-        rule_text = markdown[start:end].strip()
-        section_id = match.group(1)
+        for index, match in enumerate(matches):
+            start = match.end()
+            end = (
+                matches[index + 1].start()
+                if index + 1 < len(matches)
+                else markdown.find("\n## 5. Exceptions", start)
+            )
 
-        section_metadata = {
-            "document_id": metadata["document_id"],
-            "policy_id": metadata["policy_id"],
-            "section_id": section_id,
-            "source": path.name,
-        }
+            rule_text = markdown[start:end].strip()
+            section_id = match.group(1)
 
-        text = f"{match.group(2)}\n\n{rule_text}"
+            section_metadata = {
+                "document_id": metadata["document_id"],
+                "policy_id": metadata["policy_id"],
+                "section_id": section_id,
+                "source": path.name,
+            }
 
-        documents.append(Document(text, section_metadata))
+            text = f"{match.group(2)}\n\n{rule_text}"
+            documents.append(Document(text, section_metadata))
 
-    return documents
+        return documents
+
+    def load_corpus(self, documents_dir: Path) -> list[Document]:
+        """Load all markdown policy documents from a directory."""
+        documents = []
+        for path in sorted(documents_dir.glob("*.md")):
+            documents.extend(self.load_policy_sections(path))
+        return documents
 
 # ------------------------- TESTING -------------------------
 if __name__ == "__main__":
-    # Example usage: Load all markdown files in the "data/documents" directory
-    documents = []
-    for path in Path("data/documents").glob("*.md"):
-        documents.extend(load_policy_sections(path))
+    loader = Loader()
+    documents = loader.load_corpus(Path("data/documents"))
 
-    # Print the first two loaded documents for verification
     for document in documents[:2]:
         print(document)
-        print(document.text[:100])  # Print the first 100 characters of the text
+        print(document.text[:100])
         print(document.metadata)
         print("-" * 40)

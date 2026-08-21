@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.rag.loader import Document, extract_metadata, load_policy_sections
+from src.rag.loader import Document, Loader
 
 
 SAMPLE_MARKDOWN = """# Sample Policy
@@ -37,10 +37,11 @@ Documented exceptions are allowed.
 
 
 def test_load_policy_sections_from_sample_file(tmp_path: Path) -> None:
+    loader = Loader()
     policy_path = tmp_path / "sample_policy.md"
     policy_path.write_text(SAMPLE_MARKDOWN, encoding="utf-8")
 
-    documents = load_policy_sections(policy_path)
+    documents = loader.load_policy_sections(policy_path)
 
     assert len(documents) == 2
     assert all(isinstance(document, Document) for document in documents)
@@ -56,7 +57,7 @@ def test_load_policy_sections_from_sample_file(tmp_path: Path) -> None:
 
 
 def test_extract_metadata_normalizes_keys() -> None:
-    metadata = extract_metadata(SAMPLE_MARKDOWN)
+    metadata = Loader().extract_metadata(SAMPLE_MARKDOWN)
 
     assert metadata["document_id"] == "sample_policy"
     assert metadata["policy_id"] == "SP"
@@ -65,12 +66,9 @@ def test_extract_metadata_normalizes_keys() -> None:
 
 
 def test_load_all_policy_documents() -> None:
+    loader = Loader()
     documents_dir = Path(__file__).parents[1] / "data" / "documents"
-    documents = [
-        document
-        for policy_path in sorted(documents_dir.glob("*.md"))
-        for document in load_policy_sections(policy_path)
-    ]
+    documents = loader.load_corpus(documents_dir)
 
     assert len(list(documents_dir.glob("*.md"))) == 12
     assert len(documents) == 92
