@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.rag.loader import load_policy_sections
+from src.rag.loader import Loader
 
 
 DOCUMENTS_DIR = ROOT / "data" / "documents"
@@ -17,13 +17,14 @@ REQUIRED_METADATA = {"document_id", "policy_id", "section_id", "source"}
 
 
 def main() -> int:
+    loader = Loader()
     policy_paths = sorted(DOCUMENTS_DIR.glob("*.md"))
     loaded_documents = []
     errors = []
 
     for policy_path in policy_paths:
         try:
-            loaded_documents.extend(load_policy_sections(policy_path))
+            loaded_documents.extend(loader.load_policy_sections(policy_path))
         except Exception as error:  # Report the file that failed to load.
             errors.append(f"{policy_path.name}: {error}")
 
