@@ -18,9 +18,12 @@ Document(
 )
 ```
 """
-
+from dotenv import load_dotenv
 from pathlib import Path
 import re
+import os
+
+load_dotenv()  # Load environment variables from .env file
 
 # Define the Document class to represent each document with text and metadata
 class Document:
@@ -100,7 +103,7 @@ class Loader:
 # ------------------------- TESTING -------------------------
 if __name__ == "__main__":
     loader = Loader()
-    documents = loader.load_corpus(Path("data/documents"))
+    documents = loader.load_corpus(Path(os.getenv("DOCUMENTS_DIR", "data/documents")))
 
     for document in documents[:2]:
         print(document)
