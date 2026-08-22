@@ -25,6 +25,8 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
 
 
 def main() -> None:
+    # Instantiate loader, chunker and embedder
+    print(f"Loading documents from: {DOCUMENTS_DIR}")
     loader = Loader()
     chunker = Chunker(
         max_chunk_size=CHUNK_SIZE,
@@ -33,12 +35,17 @@ def main() -> None:
     embedder = EmbeddingModel(
         model_name=EMBEDDING_MODEL
     )
+
+    # Instantiate vector store
+    print(f"Persisting ChromaDB to: {CHROMA_DIR}")
     vectorstore = ChromaVectorStore(
         persist_directory=CHROMA_DIR
     )
 
+    # Load documents
     documents = loader.load_corpus(DOCUMENTS_DIR)
 
+    # Chunk the documents
     chunks = [
         chunk
         for document in documents
@@ -54,6 +61,7 @@ def main() -> None:
 
     print(f"Generated embeddings: {len(embeddings)}")
 
+    # Add chunks and embeddings to the vector store
     vectorstore.add_chunks(
         chunks=chunks,
         embeddings=embeddings,

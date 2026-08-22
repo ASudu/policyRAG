@@ -78,6 +78,7 @@ class ChromaVectorStore:
         metadata = [
             {
                 "document_id": chunk.document_id,
+                "chunk_id": chunk.chunk_id,
                 "policy_id": chunk.policy_id,
                 "section_id": chunk.section_id,
                 "source": chunk.source,
