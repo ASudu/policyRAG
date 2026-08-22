@@ -21,8 +21,8 @@ DOCUMENTS_DIR = Path(os.getenv("DOCUMENTS_DIR", str(ROOT / "data" / "documents")
 EXPECTED_DOCUMENT_COUNT = 12
 EXPECTED_SECTION_COUNT = 92
 
-CHUNK_SIZE = 180
-OVERLAP = 20
+CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "180"))
+OVERLAP = int(os.getenv("CHUNK_OVERLAP", "20"))
 
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
 # Probe the embedding model to determine the expected dimension of the embeddings.

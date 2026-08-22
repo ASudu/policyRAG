@@ -51,3 +51,25 @@ class EmbeddingModel:
         )
 
         return response["embeddings"]
+
+# ----------------- TESTING -----------------
+if __name__ == "__main__":
+    load_dotenv()  # Load environment variables from .env file
+
+    # Initialize the embedding model
+    embedding_model = EmbeddingModel()
+
+    # Test embedding a single query
+    query_text = "What is the policy on data privacy?"
+    query_embedding = embedding_model.embed_query(query_text)
+    print(f"Query Embedding (length {len(query_embedding)}): {query_embedding}")
+
+    # Test embedding multiple documents
+    document_texts = [
+        "Data privacy is a critical aspect of our operations.",
+        "We ensure that all user data is handled securely.",
+        "Our policies comply with international data protection regulations."
+    ]
+    document_embeddings = embedding_model.embed_documents(document_texts)
+    for i, emb in enumerate(document_embeddings):
+        print(f"Document {i} Embedding (length {len(emb)}): {emb}")
