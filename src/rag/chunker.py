@@ -23,9 +23,9 @@ from src.rag.loader import Document
 
 
 class Chunk:
-    def __init__(self, text: str, document_id: str, policy_id: str, section_id: str, source: str):
+    def __init__(self, chunk_id: int, text: str, document_id: str, policy_id: str, section_id: str, source: str):
         self.text = text
-        self.chunk_id = 0 # if multiple chunks are generated from the same section, this will be incremented (0-indexed)
+        self.chunk_id = chunk_id # if multiple chunks are generated from the same section, this will be incremented (0-indexed)
         self.document_id = document_id
         self.policy_id = policy_id
         self.section_id = section_id
