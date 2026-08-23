@@ -46,7 +46,7 @@ class ClaimEvaluation:
 class ObligationEvaluation:
     """Evaluation of whether a generated answer satisfies an obligation."""
     obligation: str
-    satisfied: bool
+    score: float # 1.0 = answered, 0.5 = partially answered, 0.0 = unanswered
     details: str = ""
 
 
