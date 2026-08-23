@@ -34,14 +34,56 @@ class RetrievalMetric:
     score: float
     details: str = ""
 
+@dataclass
+class ClaimEvaluation:
+    claim: str
+    score: float  # 1.0 = supported, 0.5 = partially supported, 0.0 = unsupported
+    evidence: list[str]
+    details: str = ""
+
+
+@dataclass
+class ObligationEvaluation:
+    """Evaluation of whether a generated answer satisfies an obligation."""
+    obligation: str
+    satisfied: bool
+    details: str = ""
+
+
+@dataclass
+class CorrectnessEvaluation:
+    """Evaluation of a generated claim against certified claims."""
+    claim: str
+    label: str
+    details: str = ""
+
 
 @dataclass
 class EvaluationResult:
+    """Complete evaluation result for one QA pair."""
+
     question: str
     certified_answer: str
     generated_answer: str
 
-    hard_checks: list[HardCheckResult]
+    # Retrieval evaluation
     retrieval_metrics: list[RetrievalMetric]
 
+    # Answer evaluation
+    groundedness: float
+    completeness: float
+    correctness: float
+
+    # Deterministic checks
+    hard_checks: list[HardCheckResult]
     overall_hard_pass: bool
+
+    # Detailed semantic evaluations
+    claim_evaluations: list[ClaimEvaluation]
+    obligation_evaluations: list[ObligationEvaluation]
+    correctness_evaluations: list[CorrectnessEvaluation]
+
+    # Final governance
+    weighted_score: float
+    failures: list[str]
+    decision: str
