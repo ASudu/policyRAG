@@ -54,6 +54,7 @@ class ObligationEvaluation:
 class CorrectnessEvaluation:
     """Evaluation of a generated claim against certified claims."""
     claim: str
+    score: float # 1.0 = supported by certified claims, 0.5 = not covered, 0.0 = contradicts certified claims
     label: str
     details: str = ""
 
