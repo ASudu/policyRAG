@@ -71,6 +71,18 @@ def classify_failures(hard_checks, retrieval_metrics, groundedness_score: float,
                 )
             )
 
+        elif metric.name == "context_relevance" and metric.score < 0.5:
+            failures.append(
+                Failure(
+                    type=FailureType.LOW_CONTEXT_RELEVANCE,
+                    severity="MAJOR",
+                    details=(
+                        f"Context relevance={metric.score:.2f}. "
+                        f"{metric.details}"
+                    ),
+                )
+            )
+
     # -------------------------
     # Groundedness
     # -------------------------
