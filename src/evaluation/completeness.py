@@ -78,11 +78,7 @@ def get_answerable_obligations(obligations: list[dict], authoritative_evidence: 
 
     return answerable
 
-def evaluate_obligations(
-    generated_answer: str,
-    answerable_obligations: list[dict],
-    model_name: str | None = None,
-) -> list[ObligationEvaluation]:
+def evaluate_obligations(generated_answer: str, answerable_obligations: list[dict], model_name: str | None = None,) -> list[ObligationEvaluation]:
     """
     Evaluate how completely the generated answer satisfies each
     answerable obligation.
