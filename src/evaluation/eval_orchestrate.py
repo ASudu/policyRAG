@@ -105,8 +105,10 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
     failures = classify_failures(
         hard_checks,
         retrieval_metrics,
-        claim_evaluations,
-        completeness_results,
+        # claim_evaluations,
+        groundedness,
+        # completeness_results,
+        completeness,
         correctness_results,
     )
 
@@ -117,12 +119,24 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
     decision = make_decision(score, hard_pass)
 
     return EvaluationResult(
+        question=qa["question"],
+        certified_answer=qa["certified_answer"],
+        generated_answer=generated_answer,
+
+        retrieval_metrics=retrieval_metrics,
+
         groundedness=groundedness,
         completeness=completeness,
         correctness=correctness,
+
         hard_checks=hard_checks,
-        retrieval_metrics=retrieval_metrics,
-        failures=failures,
+        overall_hard_pass=hard_pass,
+
+        claim_evaluations=claim_evaluations,
+        obligation_evaluations=completeness_results,
+        correctness_evaluations=correctness_results,
+
         weighted_score=score,
+        failures=failures,
         decision=decision,
     )
