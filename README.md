@@ -933,3 +933,7 @@ Governance + UI
 ```
 
 The remaining SME-alignment work is intentionally deferred until the evaluation framework has been validated against the current synthetic dataset.
+
+## License
+
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE).

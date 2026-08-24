@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 This module contains the implementation of the Chunker class, which is responsible for splitting text into smaller chunks for processing. The Chunker class provides methods to define chunk size, overlap, and other parameters to customize the chunking process. It is designed to handle various text formats and can be integrated into larger text processing pipelines.
 The Chunker class is particularly useful for preparing text data for machine learning models, natural language processing

@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we implement groundedness evaluation based on retrieved evidence. So, for each generated claim, we check if it is supported by the retrieved evidence. If a claim is not supported by any of the retrieved evidence, it is considered ungrounded.
 """

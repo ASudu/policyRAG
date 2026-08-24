@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we combine all the evaluation components into a single orchestrated evaluation process. This includes hard checks, groundedness, completeness and correctness evaluation given a QA pair.The orchestrator manages the flow of data between these components and ensures that the evaluation is performed in a structured manner.
 """

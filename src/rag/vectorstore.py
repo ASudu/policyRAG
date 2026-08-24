@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we define the chroma db structure to store our embeddings and metadata. So, our pipeline gives two things:
 

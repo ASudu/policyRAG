@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we define the structure and schemas required for the RAG evaluation pipeline. The schemas are designed to facilitate the organization and validation of data used in the evaluation process, ensuring that the inputs and outputs adhere to the expected formats and types.
 """

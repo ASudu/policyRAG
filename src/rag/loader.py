@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 This module contains the implementation of the Loader class, which is responsible for loading data from various sources and formats.
 The Loader class provides methods to read data from files, databases, and APIs, and convert it into a standardized format for further processing.

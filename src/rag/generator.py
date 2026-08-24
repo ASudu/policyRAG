@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we implement the `Generator` class, which combines the previous modules to provide a complete answer based on the retrieval of relevant documents and the generation of a response. The `Generator` class utilizes the `Retriever` to fetch relevant information and then uses a language model to generate a coherent and contextually appropriate answer based on the retrieved data.
 """

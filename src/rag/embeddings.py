@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we define the embedding classes used for the RAG model. These embeddings are responsible for converting input text into dense vector representations that can be used by the model for various tasks such as retrieval and generation. The embeddings can be based on pre-trained models or custom-trained embeddings, depending on the specific use case.
 

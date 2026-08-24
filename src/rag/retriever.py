@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we define the `Retriever` class, which is responsible for retrieving relevant documents or information based on a given query. The `Retriever` class utilizes various retrieval techniques and algorithms to efficiently search through a large corpus of data and return the most relevant results.
 """

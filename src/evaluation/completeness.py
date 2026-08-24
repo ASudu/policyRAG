@@ -1,3 +1,5 @@
+# Copyright 2026 Sudarshan A.
+# Licensed under the Apache License, Version 2.0.
 """
 In this module, we define utilities to evaluate the completeness. The answer obligations are already extracted in the dataset. We first start with filtering in the answer obligations that are answerable based on the certified retrieved context. Then we check if the answer obligations are covered in the answer. The coverage is determined by checking if the answer obligation is a substring of the answer. We return the number of answer obligations, number of covered answer obligations, and the coverage ratio.
 """
