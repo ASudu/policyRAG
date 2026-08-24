@@ -33,7 +33,7 @@ CHROMA_DIR = os.getenv("CHROMA_DIR", ROOT / "data" / "chroma")
 GENERATION_MODEL_NAME = os.getenv("GENERATION_MODEL", "llama3.2:3b")
 
 # ---------- Load QA pairs ----------
-QA_PATH = ROOT / "data" / "qa_pairs.jsonl"
+QA_PATH = ROOT / "data" / "golden_qa.jsonl"
 
 @st.cache_data
 def load_qa_dataset():
@@ -185,6 +185,9 @@ with chat_tab:
 with eval_tab:
 
     st.header("Evaluation Dashboard")
+
+    if "evaluation_results" not in st.session_state:
+        st.session_state.evaluation_results = []
 
     qa_data = load_qa_dataset()
 
