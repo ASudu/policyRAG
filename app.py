@@ -12,6 +12,7 @@ Tab Two: RAG evaluation (Select certified question --> Retrieval --> Answer --> 
 
 import os
 import json
+import time
 import streamlit as st
 from pathlib import Path
 from dotenv import load_dotenv
@@ -131,13 +132,17 @@ with chat_tab:
             expanded=False,
         ) as status:
 
+            start = time.perf_counter()
+
             chunks = retriever.retrieve(
                 query=question,
                 top_k=5,
             )
 
+            elapsed = time.perf_counter() - start
+
             status.update(
-                label="Documents retrieved",
+                label=f"Documents retrieved · {elapsed:.1f}s",
                 state="complete",
             )
 
@@ -147,13 +152,17 @@ with chat_tab:
             expanded=False,
         ) as status:
 
+            start = time.perf_counter()
+
             answer = generator.generate(
                 query=question,
                 chunks=chunks,
             )
 
+            elapsed = time.perf_counter() - start
+
             status.update(
-                label="Response generated",
+                label=f"Response generated · {elapsed:.1f}s",
                 state="complete",
             )
 
@@ -224,13 +233,17 @@ with eval_tab:
             expanded=False,
         ) as status:
 
+            start = time.perf_counter()
+
             chunks = retriever.retrieve(
                 query=question,
                 top_k=5,
             )
 
+            elapsed = time.perf_counter() - start
+
             status.update(
-                label="Documents retrieved",
+                label=f"Documents retrieved · {elapsed:.1f}s",
                 state="complete",
             )
 
@@ -254,13 +267,17 @@ with eval_tab:
             expanded=False,
         ) as status:
 
+            start = time.perf_counter()
+
             generated_answer = generator.generate(
                 query=question,
                 chunks=chunks,
             )
 
+            elapsed = time.perf_counter() - start
+
             status.update(
-                label="Response generated",
+                label=f"Response generated · {elapsed:.1f}s",
                 state="complete",
             )
 
@@ -389,7 +406,7 @@ with eval_tab:
                 with st.expander(
                     f"{failure.severity} — {failure.type}"
                 ):
-                    st.write(failure.details)
+                    st.markdown(failure.details)
 
         # -------------------------
         # Retrieved evidence
@@ -404,7 +421,7 @@ with eval_tab:
 
                 st.markdown(
                     f"**{i}. {evidence.section_id}**  \n"
-                    f"Distance: `{evidence.distance:.4f}`"
+                    f"Similarity: `{(1 - evidence.distance):.4f}`"
                 )
 
                 st.write(evidence.text)

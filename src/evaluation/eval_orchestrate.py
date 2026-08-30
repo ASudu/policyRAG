@@ -105,13 +105,13 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
     )
 
     failures = classify_failures(
-        hard_checks,
-        retrieval_metrics,
-        # claim_evaluations,
-        groundedness,
-        # completeness_results,
-        completeness,
-        correctness_results,
+        hard_checks=hard_checks,
+        retrieval_metrics=retrieval_metrics,
+        groundedness_score=groundedness,
+        completeness_score=completeness,
+        correctness_evaluations=correctness_results,
+        groundedness_results=claim_evaluations,
+        completeness_results=completeness_results,
     )
 
     hard_pass = all(

@@ -30,7 +30,8 @@ class Failure:
     severity: str
     details: str = ""
 
-def classify_failures(hard_checks, retrieval_metrics, groundedness_score: float, completeness_score: float, correctness_evaluations,) -> list[Failure]:
+def classify_failures(hard_checks, retrieval_metrics, groundedness_score: float,
+                      completeness_score: float, correctness_evaluations, groundedness_results:list=None, completeness_results:list=None) -> list[Failure]:
 
     failures = []
 
@@ -95,13 +96,21 @@ def classify_failures(hard_checks, retrieval_metrics, groundedness_score: float,
             else "MAJOR"
         )
 
+        groundedness_details = [f"Groundedness score={groundedness_score:.2f}"]
+
+        if groundedness_results:
+
+            for claim_eval in groundedness_results:
+                if claim_eval.score == 1.0:
+                    continue
+                claim_label = {0.0: 'UNGROUNDED', 0.5: 'PARTIALLY GROUNDED', 1.0: 'GROUNDED'}.get(claim_eval.score)
+                groundedness_details.append(f"{claim_eval.claim} -> {claim_label}")
+
         failures.append(
             Failure(
                 type=FailureType.UNGROUNDED_CLAIM,
                 severity=severity,
-                details=(
-                    f"Groundedness score={groundedness_score:.2f}"
-                ),
+                details="\n\n".join(groundedness_details),
             )
         )
 
@@ -115,13 +124,21 @@ def classify_failures(hard_checks, retrieval_metrics, groundedness_score: float,
             else "MAJOR"
         )
 
+        completeness_details = [f"Completeness score={completeness_score:.2f}"]
+
+        if completeness_results is not None:
+            print("completeness results was not None", completeness_results)
+            for ob in completeness_results:
+                if ob.score == 1.0:
+                    continue
+                obligation_label = {0.0: 'NOT ANSWERED', 0.5: 'PARTIALLY ANSWERED', 1.0: 'ANSWERED'}.get(ob.score)
+                completeness_details.append(f"{ob.obligation} -> {obligation_label}")
+
         failures.append(
             Failure(
                 type=FailureType.INCOMPLETE_ANSWER,
                 severity=severity,
-                details=(
-                    f"Completeness score={completeness_score:.2f}"
-                ),
+                details="\n\n".join(completeness_details),
             )
         )
 
