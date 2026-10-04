@@ -11,9 +11,9 @@ PASS_THRESHOLD = 0.85
 REVIEW_THRESHOLD = 0.60
 
 
-def make_decision(score: float, hard_checks_passed: bool) -> str:
+def make_decision(score: float, contradictions: bool) -> str:
 
-    if not hard_checks_passed:
+    if contradictions:
         return "FAIL"
 
     if score >= PASS_THRESHOLD:
