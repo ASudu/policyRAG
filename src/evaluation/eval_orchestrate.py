@@ -4,6 +4,7 @@
 In this module, we combine all the evaluation components into a single orchestrated evaluation process. This includes hard checks, groundedness, completeness and correctness evaluation given a QA pair.The orchestrator manages the flow of data between these components and ensures that the evaluation is performed in a structured manner.
 """
 
+from concurrent.futures import ThreadPoolExecutor
 from src.evaluation.schemas import EvaluationResult
 from src.evaluation.hard_checks import evaluate_hard_checks
 from src.evaluation.claims import extract_claims
@@ -17,6 +18,8 @@ from src.evaluation.decision import make_decision
 
 
 def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
+
+    question = qa["question"]
     # --------------------------------------------------
     # Hard checks
     # --------------------------------------------------
@@ -38,22 +41,7 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
     # Runtime artifacts
     # --------------------------------------------------
 
-    generated_claims = extract_claims(generated_answer)
-
-    # --------------------------------------------------
-    # Correctness
-    # --------------------------------------------------
-
-    correctness_results = evaluate_correctness(
-        certified_claims,
-        generated_claims,
-        qa["certified_answer"],
-        generated_answer,
-    )
-
-    correctness = correctness_score(
-        correctness_results
-    )
+    generated_claims = extract_claims(question, generated_answer)
 
     # --------------------------------------------------
     # Retrieval
@@ -64,35 +52,38 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
         retrieved_evidence,
     )
 
-    # --------------------------------------------------
-    # Groundedness
-    # --------------------------------------------------
-
-    claim_evaluations = evaluate_claim_grounding(
-        generated_claims,
-        retrieved_evidence,
-    )
-
-    groundedness = groundedness_score(claim_evaluations)
-
-    # --------------------------------------------------
-    # Completeness
-    # --------------------------------------------------
-
     eligible_obligations = get_answerable_obligations(
         answer_obligations,
         authoritative_evidence,
         certified_claims,
     )
 
-    completeness_results = evaluate_obligations(
-        generated_answer,
-        eligible_obligations,
-    )
+    # These evaluations are independent LLM calls once their inputs are ready.
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        correctness_future = executor.submit(
+            evaluate_correctness,
+            question,
+            certified_claims,
+            generated_claims,
+        )
+        groundedness_future = executor.submit(
+            evaluate_claim_grounding,
+            generated_claims,
+            retrieved_evidence,
+        )
+        completeness_future = executor.submit(
+            evaluate_obligations,
+            generated_answer,
+            eligible_obligations,
+        )
 
-    completeness = completeness_score(
-        completeness_results
-    )
+        correctness_results = correctness_future.result()
+        claim_evaluations = groundedness_future.result()
+        completeness_results = completeness_future.result()
+
+    correctness = correctness_score(correctness_results)
+    groundedness = groundedness_score(claim_evaluations)
+    completeness = completeness_score(completeness_results)
 
     # --------------------------------------------------
     # Final scoring
@@ -114,11 +105,12 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
         completeness_results=completeness_results,
     )
 
-    hard_pass = all(
-        check.passed for check in hard_checks
-    )
+    # hard_pass = all(
+    #     check.passed for check in hard_checks
+    # )
+    contradictions = any(check.label=="CONTRADICTS_CERTIFIED" for check in correctness_results)
 
-    decision = make_decision(score, hard_pass)
+    decision = make_decision(score, contradictions)
 
     return EvaluationResult(
         question=qa["question"],
@@ -132,7 +124,7 @@ def evaluate(qa, generated_answer, retrieved_evidence,) -> EvaluationResult:
         correctness=correctness,
 
         hard_checks=hard_checks,
-        overall_hard_pass=hard_pass,
+        overall_hard_pass=not contradictions,
 
         claim_evaluations=claim_evaluations,
         obligation_evaluations=completeness_results,

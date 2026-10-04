@@ -42,6 +42,7 @@ class ClaimEvaluation:
     score: float  # 1.0 = supported, 0.5 = partially supported, 0.0 = unsupported
     evidence: list[str]
     details: str = ""
+    classification: str = ""
 
 
 @dataclass
@@ -50,6 +51,7 @@ class ObligationEvaluation:
     obligation: str
     score: float # 1.0 = answered, 0.5 = partially answered, 0.0 = unanswered
     details: str = ""
+    classification: str = ""
 
 
 @dataclass
