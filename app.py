@@ -78,7 +78,78 @@ if "question_submitted" not in st.session_state:
 
 # ---------- Header ----------
 
-st.title("🤖 Policy RAG")
+st.markdown(
+    """
+    <style>
+    .evaluation-info {
+        margin: 0.25rem 0 0.75rem;
+    }
+
+    .evaluation-info-panel {
+        position: static;
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.6rem;
+        background: #ffffff;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+        color: #374151;
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .evaluation-info-panel::before {
+        content: "?";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.35rem;
+        height: 1.35rem;
+        margin-bottom: 0.35rem;
+        border: 1px solid #9ca3af;
+        border-radius: 50%;
+        color: #4b5563;
+        font-weight: 700;
+    }
+
+    .evaluation-info-panel p {
+        margin: 0.35rem 0 0;
+    }
+
+    .evaluation-info-panel p:first-child {
+        margin-top: 0;
+    }
+
+    .evaluation-info-panel strong {
+        color: #111827;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .evaluation-info-panel { transition: none; }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+header_left, header_right = st.columns([1.15, 0.85])
+
+with header_left:
+    st.title("🤖 Policy RAG")
+
+with header_right:
+    st.markdown(
+        """
+        <div class="evaluation-info">
+            <div class="evaluation-info-panel" role="note">
+                <p><strong>Groundedness:</strong> Has the agent faithfully replicated information from the retrieved policy evidence.</p>
+                <p><strong>Completeness:</strong> Has the agent answered all the parts of the question so a user would consider the answer complete.</p>
+                <p><strong>Correctness:</strong> Has the agent answered the question accurately without contradicting the certified answer.</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 # ---------- Tabs ----------
