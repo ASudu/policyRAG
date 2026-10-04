@@ -6,7 +6,7 @@ from src.evaluation.claims import extract_claims
 
 
 def test_extract_claims_returns_empty_for_blank_answer() -> None:
-    assert extract_claims("   ") == []
+    assert extract_claims("What is the policy?", "   ") == []
 
 
 def test_extract_claims_parses_structured_json(monkeypatch) -> None:
@@ -31,7 +31,10 @@ def test_extract_claims_parses_structured_json(monkeypatch) -> None:
 
     monkeypatch.setattr("src.evaluation.claims.chat", fake_chat)
 
-    claims = extract_claims("Yes. MFA is required for remote access and privileged accounts.")
+    claims = extract_claims(
+        "What are the MFA requirements?",
+        "Yes. MFA is required for remote access and privileged accounts.",
+    )
 
     assert claims == [
         "MFA is required for remote access.",
@@ -45,4 +48,7 @@ def test_extract_claims_returns_empty_on_invalid_json(monkeypatch) -> None:
 
     monkeypatch.setattr("src.evaluation.claims.chat", fake_chat)
 
-    assert extract_claims("Employees must submit expenses within 10 business days.") == []
+    assert extract_claims(
+        "What is the expense deadline?",
+        "Employees must submit expenses within 10 business days.",
+    ) == []
