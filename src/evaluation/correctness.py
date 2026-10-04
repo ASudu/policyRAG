@@ -7,6 +7,7 @@ import json
 from ollama import chat
 
 from src.config import settings
+from src.evaluation.prompts import render_prompt
 from src.evaluation.schemas import CorrectnessEvaluation
 
 
@@ -38,8 +39,15 @@ _CORRECTNESS_SCHEMA = {
     "additionalProperties": False,
 }
 
+_CORRECTNESS_SCORES = {
+    "SUPPORTED_BY_CERTIFIED": 1.0,
+    "NOT_COVERED": 0.5,
+    "CONTRADICTS_CERTIFIED": 0.0,
+}
 
-def evaluate_correctness(certified_claims: list[dict], generated_claims: list[str], certified_answer: str, generated_answer: str, model_name: str | None = None,) -> list[CorrectnessEvaluation]:
+
+
+def evaluate_correctness(question: str, certified_claims: list[dict], generated_claims: list[str], model_name: str | None = None,) -> list[CorrectnessEvaluation]:
     """Evaluate generated claims against the certified answer."""
 
     # No claims => no evaluation
@@ -58,29 +66,12 @@ def evaluate_correctness(certified_claims: list[dict], generated_claims: list[st
         for claim in generated_claims
     )
 
-    # Prepare the prompt for correctness evaluation
-    prompt = f"""
-Classify each generated claim against the certified claims.
-
-SUPPORTED_BY_CERTIFIED:
-The certified claims support the meaning of the generated claim.
-
-CONTRADICTS_CERTIFIED:
-The generated claim conflicts with the certified claims. Treat reversed polarity, negation, incorrect numbers, dates, deadlines, requirements, permissions, or prohibitions as contradictions.
-
-NOT_COVERED:
-The claim is neither supported nor contradicted by the certified claims.
-
-Use only the certified information. Do not use outside knowledge.
-
-Certified claims:
-{certified_claim_text}
-
-Generated claims:
-{generated_claim_text}
-
-Return one classification for every generated claim.
-""".strip()
+    prompt = render_prompt(
+        "correctness",
+        QUESTION=question.strip(),
+        CERTIFIED_CLAIMS=certified_claim_text,
+        GENERATED_CLAIMS=generated_claim_text,
+    )
 
     response = chat(
         model=model_name or settings.evaluation_model,
@@ -104,16 +95,12 @@ Return one classification for every generated claim.
 
         claim = item.get("claim", "").strip()
         label = item.get("label", "")
-        score = {"SUPPORTED_BY_CERTIFIED": 1.0, "NOT_COVERED": 0.5, "CONTRADICTS_CERTIFIED": 0.0}.get(label, None)
+        score = _CORRECTNESS_SCORES.get(label)
 
         if not claim:
             continue
 
-        if label not in {
-            "SUPPORTED_BY_CERTIFIED",
-            "CONTRADICTS_CERTIFIED",
-            "NOT_COVERED",
-        }:
+        if score is None:
             continue
 
         evaluations.append(

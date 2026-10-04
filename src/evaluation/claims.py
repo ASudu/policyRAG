@@ -8,6 +8,7 @@ from typing import Any
 from ollama import chat
 
 from src.config import settings
+from src.evaluation.prompts import render_prompt
 
 
 _CLAIMS_SCHEMA = {
@@ -40,17 +41,12 @@ def _normalize_claims(value: Any) -> list[str]:
     return claims
 
 
-def extract_claims(answer: str, model_name: str | None = None) -> list[str]:
+def extract_claims(question: str, answer: str, model_name: str | None = None) -> list[str]:
     """Extract atomic factual claims from a generated policy answer."""
     if not answer or not answer.strip():
         return []
 
-    prompt = (
-        "Extract atomic factual claims from the answer that are truly pertinent to the question/policy context. Exclude any claims that are either general knowledge about the company or irrelevant to the question/policy context. "
-        "Return JSON with key 'claims' as an array of short standalone facts. "
-        "Exclude opinions, greetings, questions, and paraphrases of the user question.\n\n"
-        f"Answer:\n{answer.strip()}"
-    )
+    prompt = render_prompt("claims", QUESTION=question.strip(), ANSWER=answer.strip())
 
     response = chat(
         model=model_name or settings.evaluation_model,

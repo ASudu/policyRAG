@@ -9,6 +9,7 @@ from ollama import chat
 
 from src.config import settings
 from src.evaluation.schemas import ObligationEvaluation
+from src.evaluation.prompts import render_prompt
 
 _COMPLETENESS_SCHEMA = {
     "type": "object",
@@ -19,19 +20,29 @@ _COMPLETENESS_SCHEMA = {
                 "type": "object",
                 "properties": {
                     "obligation": {"type": "string"},
-                    "score": {
-                        "type": "number",
-                        "enum": [0.0, 0.5, 1.0],
+                    "classification": {
+                        "type": "string",
+                        "enum": [
+                            "ANSWERED",
+                            "PARTIALLY_ANSWERED",
+                            "UNANSWERED",
+                        ],
                     },
                     "details": {"type": "string"},
                 },
-                "required": ["obligation", "score", "details"],
+                "required": ["obligation", "classification", "details"],
                 "additionalProperties": False,
             },
         }
     },
     "required": ["evaluations"],
     "additionalProperties": False,
+}
+
+_COMPLETENESS_SCORES = {
+    "ANSWERED": 1.0,
+    "PARTIALLY_ANSWERED": 0.5,
+    "UNANSWERED": 0.0,
 }
 
 def get_answerable_obligations(obligations: list[dict], authoritative_evidence: list[str], certified_claims: list[dict],) -> list[dict]:
@@ -94,29 +105,11 @@ def evaluate_obligations(generated_answer: str, answerable_obligations: list[dic
         for i, obligation in enumerate(answerable_obligations)
     )
 
-    prompt = f"""
-Evaluate whether the generated answer satisfies each answer obligation.
-
-Use exactly one score:
-
-1.0 = ANSWERED
-      The answer fully addresses the obligation.
-
-0.5 = PARTIALLY_ANSWERED
-      The answer addresses some but not all of the obligation.
-
-0.0 = UNANSWERED
-      The answer does not address the obligation.
-
-Judge only whether the answer addresses the obligation.
-Do not use outside knowledge.
-
-Answer:
-{generated_answer.strip()}
-
-Answer obligations:
-{obligations_text}
-""".strip()
+    prompt = render_prompt(
+        "completeness",
+        ANSWER=generated_answer.strip(),
+        ANSWER_OBLIGATIONS=obligations_text,
+    )
 
     response = chat(
         model=model_name or settings.evaluation_model,
@@ -139,12 +132,13 @@ Answer obligations:
             continue
 
         obligation = item.get("obligation", "").strip()
-        score = item.get("score")
+        classification = item.get("classification", "")
+        score = _COMPLETENESS_SCORES.get(classification)
 
         if not obligation:
             continue
 
-        if score not in {0.0, 0.5, 1.0}:
+        if score is None:
             continue
 
         evaluations.append(
@@ -152,6 +146,7 @@ Answer obligations:
                 obligation=obligation,
                 score=score,
                 details=item.get("details", ""),
+                classification=classification,
             )
         )
 

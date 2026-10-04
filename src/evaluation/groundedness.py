@@ -10,6 +10,7 @@ from ollama import chat
 
 from src.config import settings
 from src.evaluation.schemas import ClaimEvaluation, RetrievedEvidence
+from src.evaluation.prompts import render_prompt
 
 
 _GROUNDING_SCHEMA = {
@@ -21,9 +22,13 @@ _GROUNDING_SCHEMA = {
                 "type": "object",
                 "properties": {
                     "claim": {"type": "string"},
-                    "score": {
-                        "type": "number",
-                        "enum": [0.0, 0.5, 1.0],
+                    "classification": {
+                        "type": "string",
+                        "enum": [
+                            "SUPPORTED",
+                            "PARTIALLY_SUPPORTED",
+                            "NOT_SUPPORTED",
+                        ],
                     },
                     "evidence": {
                         "type": "array",
@@ -33,7 +38,7 @@ _GROUNDING_SCHEMA = {
                 },
                 "required": [
                     "claim",
-                    "score",
+                    "classification",
                     "evidence",
                     "details",
                 ],
@@ -43,6 +48,12 @@ _GROUNDING_SCHEMA = {
     },
     "required": ["evaluations"],
     "additionalProperties": False,
+}
+
+_GROUNDING_SCORES = {
+    "SUPPORTED": 1.0,
+    "PARTIALLY_SUPPORTED": 0.5,
+    "NOT_SUPPORTED": 0.0,
 }
 
 
@@ -64,29 +75,11 @@ def evaluate_claim_grounding(claims: list[str], retrieved_evidence: list[Retriev
     evidence_text = "\n\n".join(f"[{e.section_id}]\n{e.text}" for e in retrieved_evidence)
     claims_text = "\n".join(f"{i + 1}. {claim}" for i, claim in enumerate(claims))
 
-    prompt = f"""Determine how strongly each claim is supported by the retrieved policy evidence.
-
-Use exactly one score:
-
-1.0 = SUPPORTED (The retrieved evidence fully supports the claim.)
-
-0.5 = PARTIALLY_SUPPORTED (The evidence supports only part of the claim, or the claim contains both supported and unsupported information.)
-
-0.0 = UNSUPPORTED (The retrieved evidence does not support the claim.)
-
-DO NOT use outside knowledge.
-
-For each claim:
-- score: 1.0, 0.5, or 0.0
-- evidence: section IDs that support the claim
-- details: brief explanation
-
-Claims:
-{claims_text}
-
-Retrieved evidence:
-{evidence_text}
-""".strip()
+    prompt = render_prompt(
+        "groundedness",
+        CLAIMS=claims_text,
+        RETRIEVED_EVIDENCE=evidence_text,
+    )
 
     # LLM call to evaluate claims against retrieved evidence
     response = chat(
@@ -115,10 +108,11 @@ Retrieved evidence:
         if not claim:
             continue
 
-        score = item.get("score")
+        classification = item.get("classification", "")
+        score = _GROUNDING_SCORES.get(classification)
 
         # Defensively validate the LLM output.
-        if score not in {0.0, 0.5, 1.0}:
+        if score is None:
             continue
 
         evaluations.append(
@@ -130,6 +124,7 @@ Retrieved evidence:
                     if isinstance(e, str)
                 ],
                 details=item.get("details", ""),
+                classification=classification,
             )
         )
 
