@@ -8,16 +8,16 @@
 - version: 2.2
 - effective_date: 2026-01-15
 - owner: Information Security
-- applies_to: All workforce members with Northstar accounts
+- applies_to: All workforce members with Pseudostar accounts
 - status: Active
 
 ## 1. Purpose
 
-This policy defines how Northstar accounts are authenticated and recovered. It reduces credential theft while preserving a documented path for employees who lose access.
+This policy defines how Pseudostar accounts are authenticated and recovered. It reduces credential theft while preserving a documented path for employees who lose access.
 
 ## 2. Scope
 
-It applies to workforce accounts, service access issued to a worker, and authentication devices used for Northstar systems. System-specific controls may be stricter than this baseline.
+It applies to workforce accounts, service access issued to a worker, and authentication devices used for Pseudostar systems. System-specific controls may be stricter than this baseline.
 
 ## 3. Definitions
 
@@ -34,11 +34,11 @@ A new or changed workforce password must contain at least 14 characters. Passwor
 
 ### PA-002 — Password Uniqueness
 
-Employees must use a password that is unique to Northstar and must not reuse a Northstar password on another service. The password manager approved by IT may generate and store passwords.
+Employees must use a password that is unique to Pseudostar and must not reuse a Pseudostar password on another service. The password manager approved by IT may generate and store passwords.
 
 ### PA-003 — Multi-Factor Authentication
 
-MFA is required for all Northstar accounts when the service supports it and is mandatory for remote access, privileged accounts, and access to Restricted data. An employee must not disable MFA.
+MFA is required for all Pseudostar accounts when the service supports it and is mandatory for remote access, privileged accounts, and access to Restricted data. An employee must not disable MFA.
 
 ### PA-004 — Credential Sharing
 

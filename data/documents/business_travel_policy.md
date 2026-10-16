@@ -8,7 +8,7 @@
 - version: 2.0
 - effective_date: 2026-02-01
 - owner: Finance Operations
-- applies_to: Employees and approved contractors traveling for Northstar business
+- applies_to: Employees and approved contractors traveling for Pseudostar business
 - status: Active
 
 ## 1. Purpose
@@ -17,11 +17,11 @@ This policy establishes authorization and booking requirements for business trav
 
 ## 2. Scope
 
-It applies whenever a worker travels away from the approved work location for Northstar business. Personal extensions are allowed only when they create no additional company cost or risk and are disclosed to the manager.
+It applies whenever a worker travels away from the approved work location for Pseudostar business. Personal extensions are allowed only when they create no additional company cost or risk and are disclosed to the manager.
 
 ## 3. Definitions
 
-- **Business travel** means an approved trip whose primary purpose is Northstar work.
+- **Business travel** means an approved trip whose primary purpose is Pseudostar work.
 - **Travel authorization** means the recorded approval naming traveler, destination, dates, purpose, and estimated cost.
 - **Standard airfare** means economy class or the lowest reasonable comparable fare.
 - **International travel** means travel crossing a national border for company business.
@@ -34,7 +34,7 @@ Employees must obtain manager approval before booking business travel. The autho
 
 ### TR-002 — Booking Channel
 
-Employees must book airfare and lodging through the Northstar travel portal or an approved travel agent. If the approved channel cannot provide a reasonable itinerary, Finance may authorize another channel in writing.
+Employees must book airfare and lodging through the Pseudostar travel portal or an approved travel agent. If the approved channel cannot provide a reasonable itinerary, Finance may authorize another channel in writing.
 
 ### TR-003 — Airfare Class
 

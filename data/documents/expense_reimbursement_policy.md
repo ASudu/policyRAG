@@ -13,7 +13,7 @@
 
 ## 1. Purpose
 
-This policy defines which business expenses Northstar Analytics reimburses and the evidence, approval, and timing needed for payment. It supports reasonable spending and consistent financial records.
+This policy defines which business expenses Pseudostar Analytics reimburses and the evidence, approval, and timing needed for payment. It supports reasonable spending and consistent financial records.
 
 ## 2. Scope
 
@@ -21,7 +21,7 @@ The policy covers expenses paid personally for an approved business purpose. Cor
 
 ## 3. Definitions
 
-- **Business expense** means a reasonable cost incurred for an authorized Northstar business purpose.
+- **Business expense** means a reasonable cost incurred for an authorized Pseudostar business purpose.
 - **Receipt** means an itemized merchant record showing date, supplier, items or service, and amount.
 - **Expense report** means the HR/Finance system submission containing expenses and supporting evidence.
 - **Approver** means the employee's manager unless this policy assigns approval to Finance.
@@ -30,7 +30,7 @@ The policy covers expenses paid personally for an approved business purpose. Cor
 
 ### EX-001 — Reimbursable Expenses
 
-Northstar may reimburse reasonable transportation, lodging, meals, supplies, and customer or team expenses when they have a documented business purpose and required approval. Reimbursement is not automatic merely because an expense is work-related.
+Pseudostar may reimburse reasonable transportation, lodging, meals, supplies, and customer or team expenses when they have a documented business purpose and required approval. Reimbursement is not automatic merely because an expense is work-related.
 
 ### EX-002 — Receipt Threshold
 
@@ -50,7 +50,7 @@ Each expense must state who benefited, the business activity, and the business p
 
 ### EX-006 — Non-Reimbursable Expenses
 
-Northstar must not reimburse personal entertainment, traffic or parking fines, alcohol purchased for personal consumption, commuting between home and a regular worksite, or costs caused by deliberate policy bypass.
+Pseudostar must not reimburse personal entertainment, traffic or parking fines, alcohol purchased for personal consumption, commuting between home and a regular worksite, or costs caused by deliberate policy bypass.
 
 ### EX-007 — Currency and Conversion
 
@@ -66,7 +66,7 @@ The employee enters each expense, attaches evidence, states the business purpose
 
 ## 7. Responsibilities
 
-A report should allow a reviewer to reconstruct what was purchased, why it supported Northstar work, who approved it, and whether the evidence is complete. Employees should ask Finance before incurring an unusual cost when the reimbursement outcome is uncertain. Managers should return reports with a specific correction request rather than silently editing an employee's explanation. Finance may reject a report while preserving the employee's ability to resubmit corrected information.
+A report should allow a reviewer to reconstruct what was purchased, why it supported Pseudostar work, who approved it, and whether the evidence is complete. Employees should ask Finance before incurring an unusual cost when the reimbursement outcome is uncertain. Managers should return reports with a specific correction request rather than silently editing an employee's explanation. Finance may reject a report while preserving the employee's ability to resubmit corrected information.
 
 Employees are responsible for accurate, timely reports and preserving receipts. Managers are responsible for reviewing every report. Finance is responsible for payment controls, exception records, and final review of reports over $5,000.
 

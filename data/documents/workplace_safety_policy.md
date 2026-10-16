@@ -8,16 +8,16 @@
 - version: 1.4
 - effective_date: 2025-12-01
 - owner: Workplace Operations
-- applies_to: All employees, contractors, visitors, and interns at Northstar workplaces
+- applies_to: All employees, contractors, visitors, and interns at Pseudostar workplaces
 - status: Active
 
 ## 1. Purpose
 
-This policy describes how Northstar Analytics prevents workplace harm and responds to unsafe conditions, emergencies, and injuries. It applies practical responsibilities to people working onsite or at an approved company event.
+This policy describes how Pseudostar Analytics prevents workplace harm and responds to unsafe conditions, emergencies, and injuries. It applies practical responsibilities to people working onsite or at an approved company event.
 
 ## 2. Scope
 
-It covers Northstar offices, approved work areas, company events, and work activities performed under Northstar direction. It does not replace emergency services or location-specific instructions.
+It covers Pseudostar offices, approved work areas, company events, and work activities performed under Pseudostar direction. It does not replace emergency services or location-specific instructions.
 
 ## 3. Definitions
 
@@ -54,7 +54,7 @@ Managers must secure the area when safe, confirm affected workers receive help, 
 
 ### WS-007 — Remote Work Safety
 
-Employees working from home must maintain a reasonably safe work area and report work-related injuries or hazards under IR-001. Northstar does not require employees to disclose unrelated household conditions.
+Employees working from home must maintain a reasonably safe work area and report work-related injuries or hazards under IR-001. Pseudostar does not require employees to disclose unrelated household conditions.
 
 ## 5. Exceptions
 

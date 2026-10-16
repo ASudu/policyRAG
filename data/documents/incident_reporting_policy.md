@@ -13,15 +13,15 @@
 
 ## 1. Purpose
 
-This policy defines what must be reported to Northstar Analytics, how quickly reports must be made, and how incidents are triaged and escalated. It creates a common intake path while preserving specialized response ownership.
+This policy defines what must be reported to Pseudostar Analytics, how quickly reports must be made, and how incidents are triaged and escalated. It creates a common intake path while preserving specialized response ownership.
 
 ## 2. Scope
 
-It applies to security, privacy, safety, conduct, operational, and availability events connected to Northstar work or systems. A report may be made even when facts are incomplete or the final severity is uncertain.
+It applies to security, privacy, safety, conduct, operational, and availability events connected to Pseudostar work or systems. A report may be made even when facts are incomplete or the final severity is uncertain.
 
 ## 3. Definitions
 
-- **Incident** means a suspected or confirmed event that may harm people, information, systems, operations, compliance, or Northstar's reputation.
+- **Incident** means a suspected or confirmed event that may harm people, information, systems, operations, compliance, or Pseudostar's reputation.
 - **Near miss** means an event that could have caused harm but did not.
 - **Severity** means the initial impact category assigned during triage.
 - **Discovery** means when a person first reasonably becomes aware of the suspected event.

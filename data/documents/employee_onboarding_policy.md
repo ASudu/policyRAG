@@ -13,7 +13,7 @@
 
 ## 1. Purpose
 
-This policy establishes the minimum activities for bringing a new employee into Northstar Analytics. It coordinates documentation, training, access, and manager responsibilities so that work begins with appropriate controls.
+This policy establishes the minimum activities for bringing a new employee into Pseudostar Analytics. It coordinates documentation, training, access, and manager responsibilities so that work begins with appropriate controls.
 
 ## 2. Scope
 

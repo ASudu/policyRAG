@@ -8,7 +8,7 @@
 - version: 3.0
 - effective_date: 2026-01-15
 - owner: Information Security
-- applies_to: All workforce members and systems handling Northstar information
+- applies_to: All workforce members and systems handling Pseudostar information
 - status: Active
 
 ## 1. Purpose
@@ -17,14 +17,14 @@ This policy defines baseline safeguards for company devices, information, remote
 
 ## 2. Scope
 
-It applies to Northstar systems, company-managed devices, approved applications, and information processed for Northstar or its customers. More restrictive customer or project controls remain applicable when communicated to the worker.
+It applies to Pseudostar systems, company-managed devices, approved applications, and information processed for Pseudostar or its customers. More restrictive customer or project controls remain applicable when communicated to the worker.
 
 ## 3. Definitions
 
-- **Company device** means a Northstar-managed laptop, phone, or other endpoint enrolled by IT.
+- **Company device** means a Pseudostar-managed laptop, phone, or other endpoint enrolled by IT.
 - **Restricted data** means information labeled Restricted under the company data-classification scheme.
-- **Approved storage** means Northstar-managed storage or another service listed by IT Security as approved for the data class.
-- **Remote access** means access to an internal system from outside a Northstar-controlled network.
+- **Approved storage** means Pseudostar-managed storage or another service listed by IT Security as approved for the data class.
+- **Remote access** means access to an internal system from outside a Pseudostar-controlled network.
 
 ## 4. Policy Rules
 

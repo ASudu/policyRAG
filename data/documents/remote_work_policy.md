@@ -46,7 +46,7 @@ HR approval is required for every out-of-state request. Manager approval is also
 
 ### RW-005 — Tax and Employment Requirements
 
-Employees are responsible for complying with applicable tax and employment requirements associated with an approved location. Northstar may deny a request when it cannot support the location's employment or payroll requirements.
+Employees are responsible for complying with applicable tax and employment requirements associated with an approved location. Pseudostar may deny a request when it cannot support the location's employment or payroll requirements.
 
 ### RW-006 — Availability and Work Hours
 

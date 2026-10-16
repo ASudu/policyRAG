@@ -13,7 +13,7 @@
 
 ## 1. Purpose
 
-This policy defines Northstar Analytics' performance review cycle, participant responsibilities, ratings, and exception process. Reviews are intended to support clear expectations, useful feedback, and consistent development decisions.
+This policy defines Pseudostar Analytics' performance review cycle, participant responsibilities, ratings, and exception process. Reviews are intended to support clear expectations, useful feedback, and consistent development decisions.
 
 ## 2. Scope
 
@@ -30,7 +30,7 @@ It applies to regular employees unless People Operations records a different cyc
 
 ### PR-001 — Annual Cycle
 
-Northstar conducts one formal performance review for each eligible employee during the annual cycle. People Operations publishes the schedule and may set earlier internal deadlines.
+Pseudostar conducts one formal performance review for each eligible employee during the annual cycle. People Operations publishes the schedule and may set earlier internal deadlines.
 
 ### PR-002 — Self-Review
 

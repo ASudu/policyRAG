@@ -8,12 +8,12 @@
 - version: 2.1
 - effective_date: 2026-01-01
 - owner: People Operations
-- applies_to: All Northstar Analytics employees
+- applies_to: All Pseudostar Analytics employees
 - status: Active
 
 ## 1. Purpose
 
-This policy defines how employees request, use, and document vacation and sick leave at Northstar Analytics. It establishes predictable notice, approval, and absence-notification practices while allowing reasonable handling of unexpected events.
+This policy defines how employees request, use, and document vacation and sick leave at Pseudostar Analytics. It establishes predictable notice, approval, and absence-notification practices while allowing reasonable handling of unexpected events.
 
 ## 2. Scope
 
@@ -24,7 +24,7 @@ This policy applies to regular full-time and part-time employees. Contractors an
 - **Vacation leave** means planned time away for rest, personal matters, or other non-medical reasons.
 - **Sick leave** means time away because of illness, medical care, or recovery.
 - **Restricted period** means a team-specific period published by a manager when staffing needs limit vacation approvals.
-- **Business day** means Monday through Friday excluding Northstar company holidays.
+- **Business day** means Monday through Friday excluding Pseudostar company holidays.
 
 ## 4. Policy Rules
 

@@ -13,18 +13,18 @@
 
 ## 1. Purpose
 
-The Code of Conduct describes the behavior expected when people work for or represent Northstar Analytics. It supports respectful collaboration, transparent decisions, protection of confidential information, and prompt reporting of concerns.
+The Code of Conduct describes the behavior expected when people work for or represent Pseudostar Analytics. It supports respectful collaboration, transparent decisions, protection of confidential information, and prompt reporting of concerns.
 
 ## 2. Scope
 
-The code applies at work, at company-sponsored events, while traveling for business, and in work-related digital spaces. It applies to conduct toward coworkers, applicants, customers, suppliers, and other people affected by Northstar work.
+The code applies at work, at company-sponsored events, while traveling for business, and in work-related digital spaces. It applies to conduct toward coworkers, applicants, customers, suppliers, and other people affected by Pseudostar work.
 
 ## 3. Definitions
 
-- **Conflict of interest** means a personal, financial, or relational interest that could improperly influence a Northstar decision.
+- **Conflict of interest** means a personal, financial, or relational interest that could improperly influence a Pseudostar decision.
 - **Gift** means anything of value offered because of a business relationship, excluding ordinary low-value promotional items.
 - **Retaliation** means an adverse action because a person raised a concern, participated in a review, or used a protected reporting channel.
-- **Confidential information** means non-public Northstar, customer, employee, or partner information.
+- **Confidential information** means non-public Pseudostar, customer, employee, or partner information.
 
 ## 4. Policy Rules
 
@@ -42,7 +42,7 @@ Employees must not offer or accept a gift or hospitality that could influence a 
 
 ### COC-004 — Confidentiality
 
-Employees must protect confidential information and may use it only for authorized Northstar business. Employees must not disclose confidential information to an unauthorized person or place it in an unapproved public service.
+Employees must protect confidential information and may use it only for authorized Pseudostar business. Employees must not disclose confidential information to an unauthorized person or place it in an unapproved public service.
 
 ### COC-005 — Accurate Records
 

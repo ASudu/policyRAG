@@ -13,11 +13,11 @@
 
 ## 1. Purpose
 
-This policy governs the collection, use, access, retention, and disclosure of personal data and Restricted data at Northstar Analytics. It defines practical controls for ordinary work and escalation when a privacy concern occurs.
+This policy governs the collection, use, access, retention, and disclosure of personal data and Restricted data at Pseudostar Analytics. It defines practical controls for ordinary work and escalation when a privacy concern occurs.
 
 ## 2. Scope
 
-It applies to data about employees, applicants, customers, users, and business contacts when Northstar processes it. Project-specific instructions may impose additional restrictions.
+It applies to data about employees, applicants, customers, users, and business contacts when Pseudostar processes it. Project-specific instructions may impose additional restrictions.
 
 ## 3. Definitions
 
