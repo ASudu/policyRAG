@@ -2,13 +2,13 @@
 
 A lightweight, multi-layer evaluation framework for Retrieval-Augmented Generation (RAG) systems operating over HR policies, compliance rules, and standard operating procedures.
 
-The project uses a synthetic policy corpus and SME-reviewed QA dataset to evaluate whether a RAG system retrieves the right evidence and produces answers that are grounded, complete, and correct.
+The project uses a synthetic policy corpus (of a fictional company Pseudostar Analytics) and synthetically generated SME-reviewed QA dataset to evaluate whether a RAG system retrieves the right evidence and produces answers that are grounded, complete, and correct.
 
 ---
 
 ## Overview
 
-A typical RAG evaluation pipeline often reduces quality to a single LLM-as-a-judge score. That is risky for policy-oriented applications. 
+Evaluating a RAG pipeline is not as simple as obtaining a single LLM-as-a-judge score - it is more nuanced, and evaluation should be multi-faceted for truly exposing the weaknesses of the pipeline and act on it. This is important especially when building domain-specific RAG pipelines. Why is it multi-faceted? 
 
 An answer can sound semantically correct while:
 
